@@ -7,10 +7,19 @@ Class {
 	#instVars : [
 		'cells'
 	],
+	#classInstVars : [
+		'TheGame'
+	],
 	#category : #LightsOutGame
 }
 
-{ #category : #'world menu' }
+{ #category : #'instance creation' }
+LOGame class >> close [
+TheGame delete.
+TheGame := nil
+]
+
+{ #category : #'instance creation' }
 LOGame class >> menuCommandOn: aBuilder [
   <worldMenu>
 (aBuilder item: #'LOGame')
@@ -19,13 +28,16 @@ LOGame class >> menuCommandOn: aBuilder [
   (aBuilder item: #'Run Game')
     order: 0;
     action: [self open].
- ].
-
+  (aBuilder item: #'Exit Game')
+    order: 1;
+    action: [self close].].
 ]
 
 { #category : #'instance creation' }
 LOGame class >> open [
-^ self new openInWorld
+ TheGame ifNil:
+ [TheGame:= self new.
+  TheGame openInWorld]
 ]
 
 { #category : #initialization }
