@@ -10,6 +10,24 @@ Class {
 	#category : #LightsOutGame
 }
 
+{ #category : #'world menu' }
+LOGame class >> menuCommandOn: aBuilder [
+  <worldMenu>
+(aBuilder item: #'LOGame')
+ order: 5;
+ with: [
+  (aBuilder item: #'Run Game')
+    order: 0;
+    action: [self open].
+ ].
+
+]
+
+{ #category : #'instance creation' }
+LOGame class >> open [
+^ self new openInWorld
+]
+
 { #category : #initialization }
 LOGame >> cellsPerSide [
 "The number of cells along each side of the game"
